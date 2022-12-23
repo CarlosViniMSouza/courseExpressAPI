@@ -3,7 +3,7 @@ import express from 'express';
 const router = express.Router();
 
 // An illustrated sample for showing 'objects' on API
-const usersSample = [
+const users = [
     {
         firstName: "John",
         lastName: "Doe",
@@ -24,9 +24,15 @@ router.get('/', (req, res) => {
 });
 
 router.get('/sample', (req, res) => {
-    console.log(usersSample);
+    return res.send(users);
+});
 
-    return res.send(usersSample);
+router.post('/insert', (req, res) => {
+    const user = req.body;
+    
+    users.push(user);
+
+    res.send(user);
 });
 
 export default router;
