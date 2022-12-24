@@ -1,50 +1,18 @@
 import express from 'express';
-import { v4 as uuidv4 } from 'uuid';
+import {  
+    getUsersList, getUser,
+    createUser,
+    deleteUser,
+    updateUser
+} from '../controllers/users.js';
 
-const router = express.Router();
-
-// An illustrated sample for showing 'objects' on API
-var users = [];
+const routers = express.Router();
 
 // All routes here starting with '/users'
-router.get('/', (req, res) => {
-    return res.send(users);
-});
+routers.get('/', getUsersList);
+routers.get('/:id', getUser);
+routers.post('/', createUser);
+routers.delete('/:id', deleteUser);
+routers.patch('/:id', updateUser);
 
-router.get('/:id', (req, res) => {
-    const { id } = req.params;
-    const userFound = users.find((user) => user.id === id);
-
-    return res.send(userFound);
-});
-
-router.post('/insert', (req, res) => {
-    const user = req.body;
-    
-    users.push({ id: uuidv4(), ...user });
-
-    return res.send(user);
-});
-
-router.delete('/:id', (req, res) => {
-    const { id } = req.params;
-
-    users = users.filter((user) => user.id !== id);
-
-    res.send(`User ${id} deleted!`);
-});
-
-router.patch('/:id', (req, res) => {
-    const { id } = req.params;
-    const { firstName, lastName, age } = req.body;
-
-    const user = users.find((user) => user.id === id);
-
-    if(firstName) user.firstName = firstName;
-    if(lastName) user.lastName = lastName;
-    if(age) user.age = age;
-
-    res.send('User updated!');
-});
-
-export default router;
+export default routers;
