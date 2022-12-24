@@ -2,19 +2,16 @@
     {
         "firstName": "John",
         "lastName": "Doe",
-        "age": 22,
-        "height": 1.79
+        "age": 22
     },
     {
         "firstName": "Anna",
         "lastName": "Dinners",
-        "age": 24,
-        "height": 1.69
+        "age": 24
     },
     {
         "firstName": "Carlos",
         "lastName": "Souza",
-        "age": 20,
-        "height": 1.79
+        "age": 20
     }
 ]
