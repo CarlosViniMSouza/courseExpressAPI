@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 const router = express.Router();
 
 // An illustrated sample for showing 'objects' on API
-const users = [];
+var users = [];
 
 // All routes here starting with '/users'
 router.get('/', (req, res) => {
@@ -13,10 +13,9 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     const { id } = req.params;
-    
     const userFound = users.find(user => user.id === id);
 
-    console.log(`User requested is: ${userFound}`);
+    console.log(`User requested is: ${id.firstName}`);
 
     return res.send(userFound);
 });
@@ -26,9 +25,19 @@ router.post('/insert', (req, res) => {
     
     users.push({ id: uuidv4(), ...user });
 
-    console.log(`User ${user.firstName} added!`);
-
     return res.send(user);
+});
+
+router.delete('/:id', (req, res) => {
+    const {id} = req.params;
+
+    users = users.filter(user => user.id !== id);
+
+    res.send(`User ${id} deleted!`);
+});
+
+router.patch('/:id', (req, res) => {
+    
 });
 
 export default router;
